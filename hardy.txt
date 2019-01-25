@@ -1,0 +1,42 @@
+hardy.f90:! hardy.f90
+hardy.f90:!   particle flux and average electron energy from Hardy model 
+hardy.f90:!    subroutine hardy (nfl,nll,blats,alts,blons)
+hardy.f90:    subroutine hardy (hrut,nfl,nll)
+hardy.f90:      use hardy_mod
+hardy.f90:      data iread_hardy / 1 /
+hardy.f90:      if ( iread_hardy == 1 ) then
+hardy.f90:         iread_hardy = 0 
+hardy.f90:    end subroutine hardy
+hardy.f90:    use hardy_mod
+hardy.f90:    use hardy_mod
+hardy_mod.f90:module hardy_mod
+hardy_mod.f90:end module hardy_mod
+hardy_sami3.f90:! hardy.f90
+hardy_sami3.f90:!   particle flux and average electron energy from Hardy model 
+hardy_sami3.f90:!    subroutine hardy (nfl,nll,blats,alts,blons)
+hardy_sami3.f90:    subroutine hardy_sami3 (hrut,nfl,nll,iday)
+hardy_sami3.f90:      use hardy_mod
+hardy_sami3.f90:      data iread_hardy / 1 /
+hardy_sami3.f90:      if ( iread_hardy == 1 ) then
+hardy_sami3.f90:         iread_hardy = 0 
+hardy_sami3.f90:    end subroutine hardy_sami3
+hardy_sami3.f90:    use hardy_mod
+hardy_sami3.f90:    use hardy_mod
+Makefile:OBJ= parameter_mod.o parameter_apex_mod.o apex.o apex_mod.o  namelist_mod.o variable_mod.o message_passing_mod.o chemistry_mod.o time_mod.o photo_production_mod.o atomic_mod.o conductance_mod.o exb_mod.o hardy_mod.o misc_mod.o grid_mod.o apexcord.o chapman.o grid3-3.00.o  hwm93.o madala_sevp_dp.o  nrlmsise00.o  sami3-3.00.o  sevp13_dp.o hwm14.o heating.o solvers.o photo_production.o output.o chemistry.o potential.o exb_transport.o misc.o neutral.o shutdown.o hardy_sami3.o
+namelist_mod.f90:            blat_max4, stn,denmin,blat_min,xhardy
+sami3-3.00.f90:    use hardy_mod
+sami3-3.00.f90:        thardy  = 0.
+sami3-3.00.f90:        thardy  = 0.
+sami3-3.00.f90:        ! update hardy
+sami3-3.00.f90:            if( thardy >= 0.25 ) then
+sami3-3.00.f90:                    call hardy_sami3 (hrut,nfl,nll,iday)
+sami3-3.00.f90:                thardy = 0.
+sami3-3.00.f90:            thardy = thardy + dt / sphr
+sami3-3.00.f90:    use hardy_mod
+sami3-3.00.f90:      lhwm93,lhwm14,anu_drag0,kp,xhardy
+sami3-3.00.f90:    call mpi_bcast(xhardy,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)
+sami3-3.00.f90:    use hardy_mod
+sami3-3.00.f90:!   hardy: auroral ionization rate
+sami3-3.00.f90:!!$    call hardy_sami3 ( hrut,nfl,nll                  ) ! calculates precip stuff every 15 min
+sami3-3.00.f90:                         + chprod(i,j) +  (psout(i,j) + pnout(i,j)) * xhardy
+sami3-3.00.namelist:  xhardy     = 1.

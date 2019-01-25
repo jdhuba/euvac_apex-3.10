@@ -1,0 +1,1 @@
+/home/huba/ionosphere/weimer/data/2002/OMNI_HRO_1MIN_2002.txt

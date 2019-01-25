@@ -1,0 +1,12 @@
+
+prior changes
+
+  . added dtc for min(courant time step) 
+  . added lprnt
+  . one zone grid (instead of 4)  
+
+
+1/26/16
+
+- use dels to calculate integrated conductivities
+  (instead of d22s)
